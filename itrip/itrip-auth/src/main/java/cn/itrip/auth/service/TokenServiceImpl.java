@@ -38,7 +38,7 @@ public class TokenServiceImpl implements TokenService {
 	 */
 	@Resource
 	private RedisAPI redisAPI;
-	private int expire = SESSION_TIMEOUT;// 2h
+	private int expire = SESSION_TIMEOUT;// 30min
 	private String tokenPrefix = "token:";//统一加入 token前缀标识
 
 	public int getExpire() {

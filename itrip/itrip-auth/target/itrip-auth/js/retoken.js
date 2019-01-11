@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //循环执行，每隔5秒钟执行一次 5000
-    window.setInterval(refreshCount, 5000);
+    window.setInterval(refreshCount, 60000);
     function refreshCount() {
         send();
     }
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function send() {
     $.ajax({
-        "url": "/authDemo/api/retoken",
+        "url": "/itrip-auth/api/retoken",
         "type": "GET",
         //"data": {"name": "1044732267@qq.com", "password": "123456"},
         "dataType": "json",

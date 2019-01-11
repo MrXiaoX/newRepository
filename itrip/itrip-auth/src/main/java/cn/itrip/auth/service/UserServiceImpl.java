@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	private MailService mailService;
     @Resource
     private SmsService smsService;
-	private int expire=1;//过期时间（分钟）
+	private int expire=5;//过期时间（分钟）
     /**
      * 创建用户
      * @param user
@@ -51,13 +51,18 @@ public class UserServiceImpl implements UserService {
      * 创建手机账号
      */
     @Override
-	public void itriptxCreateUserByPhone(ItripUser user) throws Exception {		
+	public void itriptxCreateUserByPhone(ItripUser user) throws Exception {
+       //生产随机6位验证码
+		/*String verification=String.valueOf((int)((Math.random()*9+1)*100000));
+		System.out.println("验证码:"+verification);*/
+
 		//发送短信验证码
-		String code=String.valueOf(MD5.getRandomCode());		
+		String code=String.valueOf(MD5.getRandomCode());
+		System.out.println("验证码:"+code);
 		smsService.send(user.getUserCode(), "1", new String[]{code,String.valueOf(expire)});
 		//缓存验证码
 		String key="activation:"+user.getUserCode();
-		redisAPI.set(key, expire*60, code);	
+		redisAPI.set(key, expire*60, code);
 		//保存用户信息
 		itripUserMapper.insertItripUser(user);
 	}
@@ -160,7 +165,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * 短信验证手机号
+	 * 激活手机号
 	 * @throws Exception 
 	 */
 	@Override

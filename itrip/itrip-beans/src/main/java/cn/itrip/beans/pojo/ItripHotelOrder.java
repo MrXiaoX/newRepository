@@ -3,35 +3,46 @@ package cn.itrip.beans.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 public class ItripHotelOrder implements Serializable {
 
-            private Long id;
-            private Long userId;
-            private Integer orderType;
-            private String orderNo;
-            private String tradeNo;
-            private Long hotelId;
-            private String hotelName;
-            private Long roomId;
-            private Integer count;
-            private Integer bookingDays;
-            private Date checkInDate;
-            private Date checkOutDate;
-            private Integer orderStatus;
-            private BigDecimal payAmount;
-            private Integer payType;
-            private String noticePhone;
-            private String noticeEmail;
-            private String specialRequirement;
-            private Integer isNeedInvoice;
-            private Integer invoiceType;
-            private String invoiceHead;
-            private String linkUserName;
-            private Date creationDate;
-            private Long createdBy;
-            private Date modifyDate;
-            private Long modifiedBy;
-            private Integer bookType;
+    private Integer roomPayType;
+
+    public Integer getRoomPayType() {
+        return roomPayType;
+    }
+
+    public void setRoomPayType(Integer roomPayType) {
+        this.roomPayType = roomPayType;
+    }
+
+    private Long id;
+    private Long userId;
+    private Integer orderType;
+    private String orderNo;
+    private String tradeNo;
+    private Long hotelId;
+    private String hotelName;
+    private Long roomId;
+    private Integer count;
+    private Integer bookingDays;
+    private Date checkInDate;
+    private Date checkOutDate;
+    private Integer orderStatus;
+    private BigDecimal payAmount;
+    private Integer payType;
+    private String noticePhone;
+    private String noticeEmail;
+    private String specialRequirement;
+    private Integer isNeedInvoice;
+    private Integer invoiceType;
+    private String invoiceHead;
+    private String linkUserName;
+    private Date creationDate;
+    private Long createdBy;
+    private Date modifyDate;
+    private Long modifiedBy;
+    private Integer bookType;
 
     public Integer getBookType() {
         return bookType;
@@ -41,187 +52,211 @@ public class ItripHotelOrder implements Serializable {
         this.bookType = bookType;
     }
 
-    public void setId (Long  id){
-                this.id=id;
-            }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-            public  Long getId(){
-                return this.id;
-            }
-            public void setUserId (Long  userId){
-                this.userId=userId;
-            }
+    public Long getId() {
+        return this.id;
+    }
 
-            public  Long getUserId(){
-                return this.userId;
-            }
-            public void setOrderType (Integer  orderType){
-                this.orderType=orderType;
-            }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-            public  Integer getOrderType(){
-                return this.orderType;
-            }
-            public void setOrderNo (String  orderNo){
-                this.orderNo=orderNo;
-            }
+    public Long getUserId() {
+        return this.userId;
+    }
 
-            public  String getOrderNo(){
-                return this.orderNo;
-            }
-            public void setTradeNo (String  tradeNo){
-                this.tradeNo=tradeNo;
-            }
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
+    }
 
-            public  String getTradeNo(){
-                return this.tradeNo;
-            }
-            public void setHotelId (Long  hotelId){
-                this.hotelId=hotelId;
-            }
+    public Integer getOrderType() {
+        return this.orderType;
+    }
 
-            public  Long getHotelId(){
-                return this.hotelId;
-            }
-            public void setHotelName (String  hotelName){
-                this.hotelName=hotelName;
-            }
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
 
-            public  String getHotelName(){
-                return this.hotelName;
-            }
-            public void setRoomId (Long  roomId){
-                this.roomId=roomId;
-            }
+    public String getOrderNo() {
+        return this.orderNo;
+    }
 
-            public  Long getRoomId(){
-                return this.roomId;
-            }
-            public void setCount (Integer  count){
-                this.count=count;
-            }
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo;
+    }
 
-            public  Integer getCount(){
-                return this.count;
-            }
-            public void setBookingDays (Integer  bookingDays){
-                this.bookingDays=bookingDays;
-            }
+    public String getTradeNo() {
+        return this.tradeNo;
+    }
 
-            public  Integer getBookingDays(){
-                return this.bookingDays;
-            }
-            public void setCheckInDate (Date  checkInDate){
-                this.checkInDate=checkInDate;
-            }
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
+    }
 
-            public  Date getCheckInDate(){
-                return this.checkInDate;
-            }
-            public void setCheckOutDate (Date  checkOutDate){
-                this.checkOutDate=checkOutDate;
-            }
+    public Long getHotelId() {
+        return this.hotelId;
+    }
 
-            public  Date getCheckOutDate(){
-                return this.checkOutDate;
-            }
-            public void setOrderStatus (Integer  orderStatus){
-                this.orderStatus=orderStatus;
-            }
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
 
-            public  Integer getOrderStatus(){
-                return this.orderStatus;
-            }
-            public void setPayAmount (BigDecimal  payAmount){
-                this.payAmount=payAmount;
-            }
+    public String getHotelName() {
+        return this.hotelName;
+    }
 
-            public  BigDecimal getPayAmount(){
-                return this.payAmount;
-            }
-            public void setPayType (Integer  payType){
-                this.payType=payType;
-            }
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
 
-            public  Integer getPayType(){
-                return this.payType;
-            }
-            public void setNoticePhone (String  noticePhone){
-                this.noticePhone=noticePhone;
-            }
+    public Long getRoomId() {
+        return this.roomId;
+    }
 
-            public  String getNoticePhone(){
-                return this.noticePhone;
-            }
-            public void setNoticeEmail (String  noticeEmail){
-                this.noticeEmail=noticeEmail;
-            }
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
-            public  String getNoticeEmail(){
-                return this.noticeEmail;
-            }
-            public void setSpecialRequirement (String  specialRequirement){
-                this.specialRequirement=specialRequirement;
-            }
+    public Integer getCount() {
+        return this.count;
+    }
 
-            public  String getSpecialRequirement(){
-                return this.specialRequirement;
-            }
-            public void setIsNeedInvoice (Integer  isNeedInvoice){
-                this.isNeedInvoice=isNeedInvoice;
-            }
+    public void setBookingDays(Integer bookingDays) {
+        this.bookingDays = bookingDays;
+    }
 
-            public  Integer getIsNeedInvoice(){
-                return this.isNeedInvoice;
-            }
-            public void setInvoiceType (Integer  invoiceType){
-                this.invoiceType=invoiceType;
-            }
+    public Integer getBookingDays() {
+        return this.bookingDays;
+    }
 
-            public  Integer getInvoiceType(){
-                return this.invoiceType;
-            }
-            public void setInvoiceHead (String  invoiceHead){
-                this.invoiceHead=invoiceHead;
-            }
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
 
-            public  String getInvoiceHead(){
-                return this.invoiceHead;
-            }
-            public void setCreationDate (Date  creationDate){
-                this.creationDate=creationDate;
-            }
+    public Date getCheckInDate() {
+        return this.checkInDate;
+    }
 
-            public  Date getCreationDate(){
-                return this.creationDate;
-            }
-            public void setCreatedBy (Long  createdBy){
-                this.createdBy=createdBy;
-            }
+    public void setCheckOutDate(Date checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
 
-            public  Long getCreatedBy(){
-                return this.createdBy;
-            }
-            public void setModifyDate (Date  modifyDate){
-                this.modifyDate=modifyDate;
-            }
+    public Date getCheckOutDate() {
+        return this.checkOutDate;
+    }
 
-            public  Date getModifyDate(){
-                return this.modifyDate;
-            }
-            public void setModifiedBy (Long  modifiedBy){
-                this.modifiedBy=modifiedBy;
-            }
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
-            public  Long getModifiedBy(){
-                return this.modifiedBy;
-            }
+    public Integer getOrderStatus() {
+        return this.orderStatus;
+    }
 
-            public String getLinkUserName() {
-                return linkUserName;
-            }
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
+    }
 
-            public void setLinkUserName(String linkUserName) {
-                this.linkUserName = linkUserName;
-            }
+    public BigDecimal getPayAmount() {
+        return this.payAmount;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+    }
+
+    public Integer getPayType() {
+        return this.payType;
+    }
+
+    public void setNoticePhone(String noticePhone) {
+        this.noticePhone = noticePhone;
+    }
+
+    public String getNoticePhone() {
+        return this.noticePhone;
+    }
+
+    public void setNoticeEmail(String noticeEmail) {
+        this.noticeEmail = noticeEmail;
+    }
+
+    public String getNoticeEmail() {
+        return this.noticeEmail;
+    }
+
+    public void setSpecialRequirement(String specialRequirement) {
+        this.specialRequirement = specialRequirement;
+    }
+
+    public String getSpecialRequirement() {
+        return this.specialRequirement;
+    }
+
+    public void setIsNeedInvoice(Integer isNeedInvoice) {
+        this.isNeedInvoice = isNeedInvoice;
+    }
+
+    public Integer getIsNeedInvoice() {
+        return this.isNeedInvoice;
+    }
+
+    public void setInvoiceType(Integer invoiceType) {
+        this.invoiceType = invoiceType;
+    }
+
+    public Integer getInvoiceType() {
+        return this.invoiceType;
+    }
+
+    public void setInvoiceHead(String invoiceHead) {
+        this.invoiceHead = invoiceHead;
+    }
+
+    public String getInvoiceHead() {
+        return this.invoiceHead;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getCreationDate() {
+        return this.creationDate;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Long getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public Date getModifyDate() {
+        return this.modifyDate;
+    }
+
+    public void setModifiedBy(Long modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public Long getModifiedBy() {
+        return this.modifiedBy;
+    }
+
+    public String getLinkUserName() {
+        return linkUserName;
+    }
+
+    public void setLinkUserName(String linkUserName) {
+        this.linkUserName = linkUserName;
+    }
 }

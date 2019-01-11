@@ -1,3 +1,4 @@
+/*
 package cn.itrip.auth.service;
 
 import cn.itrip.beans.pojo.ItripUser;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class TestUserService {
 
+*/
 /*    @Test
     public void testAddUser() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -24,7 +26,8 @@ public class TestUserService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }*/
+    }*//*
+
 
     @Test
     public void testfindAll() {
@@ -42,3 +45,4 @@ public class TestUserService {
         }
     }
 }
+*/

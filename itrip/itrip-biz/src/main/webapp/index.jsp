@@ -39,7 +39,7 @@
 </head>
 <body>
 <div>
-    <input type="button" id="bt2" value="提交1"/>
+    <input type="button" id="bt2" value="提交"/>
 </div>
 <div id="tabDiv">
 

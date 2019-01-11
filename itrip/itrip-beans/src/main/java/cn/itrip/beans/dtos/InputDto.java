@@ -8,6 +8,7 @@ public class InputDto {
 	private String paramString;
 	@ApiModelProperty(value="多个参数传入")
 	private String[] paramStrings;
+
 	public String getParamString() {
 		return paramString;
 	}

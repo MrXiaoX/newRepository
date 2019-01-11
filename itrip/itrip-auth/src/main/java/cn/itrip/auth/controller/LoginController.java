@@ -72,7 +72,7 @@ public class LoginController {
                 return DtoUtil.returnDataSuccess(tokenVO);
             } else {
                 return DtoUtil.returnFail("用户名密码错误", ErrorCode.AUTH_AUTHENTICATION_FAILED);
-        }
+            }
         } else {
             return DtoUtil.returnFail("参数错误！检查提交的参数名称是否正确。", ErrorCode.AUTH_PARAMETER_ERROR);
         }
@@ -145,6 +145,7 @@ public class LoginController {
 
     /**
      * ajax获取用户列表
+     *
      * @param request
      * @return
      */
@@ -167,4 +168,31 @@ public class LoginController {
             return DtoUtil.returnFail("系统异常", "100513");
         }
     }
+
+    @RequestMapping(value = "/index.html")
+    public String index() {
+        return "login/index";
+    }
+
+    @RequestMapping(value = "/getUserList.html")
+    public String getUserList() {
+        return "login/getUserList";
+    }
+
+    @RequestMapping(value = "/refrToken.html")
+    public String refrToken() {
+        return "login/refrToken";
+    }
+
+    @RequestMapping(value = "/validateToken.html")
+    public String validateToken() {
+        return "login/validateToken";
+    }
+
+    @RequestMapping(value = "/userlink.html")
+    public String userlink() {
+        return "userlink/index";
+    }
+
+
 }

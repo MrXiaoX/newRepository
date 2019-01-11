@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.hotelorder.ItripOrderMapper">
+    <select id="getPreOrderInfo" resultType="cn.itrip.beans.pojo.ItripHotelOrder">
+        select *  from itrip_hotel_order
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="checkInDate != null">
+                and checkInDate=#{checkInDate}
+            </if>
+            <if test="checkOutDate != null">
+                and checkOutDate=#{checkOutDate}
+            </if>
+            <if test="count != null">
+                and count=#{count}
+            </if>
+            <if test="hotelId != null">
+                and hotelId=#{hotelId}
+            </if>
+            <if test="roomId != null">
+                and roomId=#{roomId}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getPersonalOrderInfo" resultType="cn.itrip.beans.pojo.ItripHotelOrder">
+        select o.*,r.payType as roomPayType from itrip_hotel_order o,itrip_hotel_room r
+        <trim prefix="where" prefixOverrides="and | or">
+            o.roomId=r.id
+            <if test="id != null">
+               and o.id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addHotelOrder" parameterType="cn.itrip.beans.vo.order.ItripAddHotelOrderVO">
+insert into itrip_hotel_order
+(bookingDays,orderStatus,creationDate,checkInDate,userId,orderNo,checkOutDate,count,hotelId,hotelName,invoiceHead,invoiceType,
+isNeedInvoice,linkUserName,noticeEmail,noticePhone,orderType,roomId,specialRequirement)
+values(3,3,now(),now(),12,'D100000120181211225524c4ce7b',now(),#{count},#{hotelId},#{hotelName}
+,#{invoiceHead},#{invoiceType},#{isNeedInvoice},#{linkUserName},#{noticeEmail},
+#{noticePhone},#{orderType},#{roomId},#{specialRequirement}');
+    </insert>
+
+    <select id="getOrderRoomInfo" resultType="cn.itrip.beans.vo.order.ItripPersonalOrderRoomVO">
+        SELECT h.address as address,o.bookingDays as bookingDays,o.checkInDate as checkInDate,o.checkOutDate as checkOutDate
+,o.count as count,o.hotelId as hotelId,h.hotelLevel as hotelLevel,o.hotelName as hotelName,o.id as id,r.isHavingBreakfast
+as isHavingBreakfast,o.linkUserName as linkUserName,o.payAmount as payAmount,r.roomBedTypeId as roomBedTypeId,d.`name` as roomBedTypeName
+,o.roomId,o.payType as roomPayType,r.roomTitle as roomTitle,o.specialRequirement as specialRequirement
+from itrip_hotel h, itrip_hotel_order o,itrip_hotel_room r,itrip_label_dic d
+where o.hotelId=h.id and r.hotelId=h.id and o.roomId=r.id and r.roomBedTypeId=d.id and o.hotelId=#{hotelId}
+    </select>
+</mapper>

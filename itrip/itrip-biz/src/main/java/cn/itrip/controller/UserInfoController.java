@@ -3,9 +3,14 @@ package cn.itrip.controller;
 import cn.itrip.beans.dtos.Dto;
 import cn.itrip.beans.pojo.ItripUser;
 import cn.itrip.beans.pojo.ItripUserLinkUser;
+import cn.itrip.beans.vo.userinfo.ItripAddUserLinkUserVO;
+import cn.itrip.beans.vo.userinfo.ItripModifyUserLinkUserVO;
 import cn.itrip.beans.vo.userinfo.ItripSearchUserLinkUserVO;
 import cn.itrip.common.DtoUtil;
+import cn.itrip.common.ErrorCode;
+import cn.itrip.common.MD5;
 import cn.itrip.common.ValidationToken;
+import cn.itrip.service.userlinkuser.ItripUserLinkUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
@@ -42,6 +47,9 @@ public class UserInfoController {
     @Resource
     private ValidationToken validationToken;
 
+    @Resource
+    private ItripUserLinkUserService itripUserLinkUserService;
+
 
     /**
      * 根据UserId,联系人姓名查询常用联系人-add by donghai
@@ -57,18 +65,15 @@ public class UserInfoController {
             "<p>错误码：</p>" +
             "<p>100401 : 获取常用联系人信息失败 </p>" +
             "<p>100000 : token失效，请重登录</p>")
-    //@RequestMapping(value = "/queryuserlinkuser",method= RequestMethod.POST)
     @RequestMapping(value = "/queryuserlinkuser", method = RequestMethod.POST)
     @ResponseBody
     public Dto<ItripUserLinkUser> queryUserLinkUser(@RequestBody ItripSearchUserLinkUserVO itripSearchUserLinkUserVO, HttpServletRequest request) {
         String tokenString = request.getHeader("token");
         logger.info("tokenString>>>>>>>>>>>>>" + tokenString);
-        logger.debug("token name is from header : " + tokenString);
         logger.info("linkUserName>>>>>>>>>" + itripSearchUserLinkUserVO.getLinkUserName());
-        /*ItripUser currentUser = validationToken.getCurrentUser(tokenString);
+        ItripUser currentUser = validationToken.getCurrentUser(tokenString);
         List<ItripUserLinkUser> userLinkUserList = new ArrayList<ItripUserLinkUser>();
         String linkUserName = (null == itripSearchUserLinkUserVO) ? null : itripSearchUserLinkUserVO.getLinkUserName();
-        Dto dto = null;
         if (null != currentUser) {
             Map param = new HashMap();
             param.put("userId", currentUser.getId());
@@ -83,8 +88,120 @@ public class UserInfoController {
             }
         } else {
             return DtoUtil.returnFail("token失效，请重新登录", "100000");
-        }*/
-        return DtoUtil.returnFail("token失效，请重新登录", "100000");
+        }
+    }
+
+
+    //添加联系人
+    @RequestMapping(value = "/adduserlinkuser", method = RequestMethod.POST)
+    @ResponseBody
+    public Dto addUserLinkUser(@RequestBody ItripAddUserLinkUserVO itripAddUserLinkUserVO, HttpServletRequest request) {
+        String tokenString = request.getHeader("token");
+        logger.info("tokenString>>>>>>>>>>>>>" + tokenString);
+        logger.info("linkUserName>>>>>>>>>" + itripAddUserLinkUserVO.getLinkUserName());
+        logger.info("linkUserName>>>>>>>>>" + itripAddUserLinkUserVO.getLinkIdCardType());
+        logger.info("linkUserName>>>>>>>>>" + itripAddUserLinkUserVO.getLinkIdCard());
+        ItripUser currentUser = validationToken.getCurrentUser(tokenString);
+        logger.info("linkUserName>>>>>>>>>" + currentUser.getId());
+        if (null != currentUser) {
+            try {
+                ItripUserLinkUser itripUserLinkUser = new ItripUserLinkUser();
+                itripUserLinkUser.setLinkUserName(itripAddUserLinkUserVO.getLinkUserName());
+                itripUserLinkUser.setLinkIdCardType(itripAddUserLinkUserVO.getLinkIdCardType());
+                itripUserLinkUser.setLinkIdCard(itripAddUserLinkUserVO.getLinkIdCard());
+                itripUserLinkUser.setLinkPhone(itripAddUserLinkUserVO.getLinkPhone());
+                itripUserLinkUser.setUserId(currentUser.getId());
+                itripUserLinkUser.setCreatedBy(currentUser.getId());
+                Integer i = itripUserLinkUserService.addItripUserLinkUser(itripUserLinkUser);
+                System.out.println("添加成功>>>" + i);
+                return DtoUtil.returnSuccess("添加常用联系人信息成功");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return DtoUtil.returnFail("获取常用联系人信息失败", "100401");
+            }
+        } else {
+            return DtoUtil.returnFail("添加失败，请重新添加", "100000");
+        }
+    }
+
+    //删除联系人
+    @RequestMapping(value = "/deluserlinkuser", method = RequestMethod.GET)
+    @ResponseBody
+    public Dto delUserLinkuser(@RequestParam Long[] ids, HttpServletRequest request) {
+        String tokenString = request.getHeader("token");
+        logger.info("tokenString>>>>>>>>>>>>>" + tokenString);
+        System.out.println("uid>>>>>>" + ids);
+        ItripUser currentUser = validationToken.getCurrentUser(tokenString);
+        logger.info("currentUser>>>>>>>>>>>>>" + currentUser);
+        if (null != currentUser) {
+            try {
+                Integer i = itripUserLinkUserService.deleteItripUserLinkUserByIds(ids);
+                System.out.println("删除成功>>>" + i);
+                return DtoUtil.returnSuccess("删除常用联系人信息成功");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return DtoUtil.returnFail("删除常用联系人信息失败", "100401");
+            }
+        } else {
+            return DtoUtil.returnFail("删除失败，请重新删除", "100000");
+        }
+    }
+    /**
+     * 根据修改查询联系人
+     */
+    @RequestMapping(value = "/selectlinkuser", method = RequestMethod.POST)
+    @ResponseBody
+    public Dto<ItripUserLinkUser> selectlinkuser(@RequestBody Long id, HttpServletRequest request) {
+        String tokenString = request.getHeader("token");
+        logger.info("tokenString>>>>>>>>>>>>>" + tokenString);
+        logger.info("id>>>>>>>>>" + id);
+        ItripUser currentUser = validationToken.getCurrentUser(tokenString);
+        ItripUserLinkUser userLinkUserList =null;
+        if (null != currentUser) {
+            try {
+                userLinkUserList = itripUserLinkUserService.getItripUserLinkUserById(id);
+                System.out.println("名字"+userLinkUserList.getLinkUserName());
+                System.out.println("身份证"+userLinkUserList.getLinkIdCard());
+                return DtoUtil.returnSuccess("获取常用联系人信息成功",userLinkUserList);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return DtoUtil.returnFail("获取常用联系人信息失败", "100401");
+            }
+        } else {
+            return DtoUtil.returnFail("token失效，请重新登录", "100000");
+        }
+    }
+
+    //添加联系人
+    @RequestMapping(value = "/modifyuserlinkuser", method = RequestMethod.POST)
+    @ResponseBody
+    public Dto updataLinkUser(@RequestBody ItripModifyUserLinkUserVO itripModifyUserLinkUserVO, HttpServletRequest request) {
+        String tokenString = request.getHeader("token");
+        logger.info("tokenString>>>>>>>>>>>>>" + tokenString);
+        logger.info("getId>>>>>>>>>" + itripModifyUserLinkUserVO.getId());
+        logger.info("linkUserName>>>>>>>>>" + itripModifyUserLinkUserVO.getLinkUserName());
+        logger.info("getLinkIdCardType>>>>>>>>>" + itripModifyUserLinkUserVO.getLinkIdCardType());
+        logger.info("getLinkIdCard>>>>>>>>>" + itripModifyUserLinkUserVO.getLinkIdCard());
+        ItripUser currentUser = validationToken.getCurrentUser(tokenString);
+        logger.info("linkUseId>>>>>>>>>" + currentUser.getId());
+        if (null != currentUser) {
+            try {
+                ItripUserLinkUser itripUserLinkUser = new ItripUserLinkUser();
+                itripUserLinkUser.setId(itripModifyUserLinkUserVO.getId());
+                itripUserLinkUser.setLinkUserName(itripModifyUserLinkUserVO.getLinkUserName());
+                itripUserLinkUser.setLinkIdCardType(itripModifyUserLinkUserVO.getLinkIdCardType());
+                itripUserLinkUser.setLinkIdCard(itripModifyUserLinkUserVO.getLinkIdCard());
+                itripUserLinkUser.setLinkPhone(itripModifyUserLinkUserVO.getLinkPhone());
+                Integer i = itripUserLinkUserService.modifyItripUserLinkUser(itripUserLinkUser);
+                System.out.println("修改成功>>>" + i);
+                return DtoUtil.returnSuccess("修改常用联系人信息成功");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return DtoUtil.returnFail("修改常用联系人信息失败", "100401");
+            }
+        } else {
+            return DtoUtil.returnFail("修改失败，请重新添加", "100000");
+        }
     }
 
 }

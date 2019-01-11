@@ -2,6 +2,7 @@ package cn.itrip.beans.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+//酒店信息表
 public class ItripHotel implements Serializable {
 
             private Long id;

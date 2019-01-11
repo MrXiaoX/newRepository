@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/itrip-auth" />
     <file type="web" url="file://$PROJECT_DIR$/itrip-biz" />
+    <file type="web" url="file://$PROJECT_DIR$/itrip-search" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

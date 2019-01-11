@@ -12,13 +12,12 @@ public interface TokenService {
 	/**
 	 * 会话超时时间
 	 */
-	//public final static int SESSION_TIMEOUT=2*60*60;//默认2h
-	public final static int SESSION_TIMEOUT=3*60;//默认30 S
+	public final static int SESSION_TIMEOUT=3*60;//默认30 min
 
 	/**
 	 * 置换保护时间
 	 */
-	public final static int REPLACEMENT_PROTECTION_TIMEOUT=60*1;//默认1h
+	public final static int REPLACEMENT_PROTECTION_TIMEOUT=60*2;//默认2min
 
 	/**
 	 * 旧token延迟过期时间

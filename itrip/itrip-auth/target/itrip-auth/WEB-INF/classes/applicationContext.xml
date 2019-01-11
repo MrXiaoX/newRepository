@@ -71,6 +71,7 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="cn.itrip.dao"/>
 	</bean>
+
 	<!--redis 配置 开始-->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property  name="maxActive"  value="${redis.maxActive}" />
@@ -78,6 +79,7 @@
 		<property  name="maxWait"  value="${redis.maxWait}" />
 		<property  name="testOnBorrow"  value="true" />
 	</bean>
+
 	<!-- Config poolConfig, String host, int port, int timeout, String password, int database-->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy" >
 		<constructor-arg ref="jedisPoolConfig"/>

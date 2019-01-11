@@ -24,9 +24,9 @@ public class MD5 {
 					buf.append("0");
 				buf.append(Integer.toHexString(i));
 			}
-			// 32浣�
+			// 32位MD5
 			// return buf.toString();
-			// 16浣�
+			// 16位MD5
 			// return buf.toString().substring(0, 16);
 			
 			return buf.toString().substring(0, length);

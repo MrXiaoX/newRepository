@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itrip.dao.hotel.ItripHotelMapper">
+
+    <select id="getItripHotelById" resultType="cn.itrip.beans.pojo.ItripHotel">
+        select
+        id as id,
+        hotelName as hotelName,
+        countryId as countryId,
+        provinceId as provinceId,
+        cityId as cityId,
+        address as address,
+        details as details,
+        facilities as facilities,
+        hotelPolicy as hotelPolicy,
+        hotelType as hotelType,
+        hotelLevel as hotelLevel,
+        isGroupPurchase as isGroupPurchase,
+        redundantCityName as redundantCityName,
+        redundantProvinceName as redundantProvinceName,
+        redundantCountryName as redundantCountryName,
+        redundantHotelStore as redundantHotelStore,
+        createdBy as createdBy,
+        modifyDate as modifyDate,
+        modifiedBy as modifiedBy
+        from itrip_hotel
+        <trim prefix="where" prefixOverrides="and | or">
+            and id=#{id}
+        </trim>
+    </select>
+
+    <select id="getItripHotelBy" resultType="cn.itrip.beans.pojo.ItripHotel">
+        select
+        id as id,
+        hotelName as hotelName,
+        countryId as countryId,
+        provinceId as provinceId,
+        cityId as cityId,
+        address as address,
+        details as details,
+        facilities as facilities,
+        hotelPolicy as hotelPolicy,
+        hotelType as hotelType,
+        hotelLevel as hotelLevel,
+        isGroupPurchase as isGroupPurchase,
+        redundantCityName as redundantCityName,
+        redundantProvinceName as redundantProvinceName,
+        redundantCountryName as redundantCountryName,
+        redundantHotelStore as redundantHotelStore,
+        createdBy as createdBy,
+        modifyDate as modifyDate,
+        modifiedBy as modifiedBy
+        from itrip_hotel
+        <trim prefix="where" prefixOverrides="and | or">
+            and id=#{id}
+        </trim>
+    </select>
+
+    <select id="getItripAreaDicById" resultType="cn.itrip.beans.pojo.ItripAreaDic">
+        select
+        id as id,
+        name as name,
+        areaNo as areaNo,
+        parent as parent,
+        isActivated as isActivated,
+        isTradingArea as isTradingArea,
+        isHot as isHot,
+        level as level,
+        isChina as isChina,
+        pinyin as pinyin,
+        creationDate as creationDate,
+        createdBy as createdBy,
+        modifyDate as modifyDate,
+        modifiedBy as modifiedBy
+        from itrip_area_dic
+        <trim prefix="where" prefixOverrides=" and | or">
+            and id=#{id}
+        </trim>
+    </select>
+
+    <select id="getItripAreaDicListByMap" resultType="cn.itrip.beans.pojo.ItripAreaDic" parameterType="java.util.Map">
+        select
+        id as id,
+        name as name,
+        areaNo as areaNo,
+        parent as parent,
+        isActivated as isActivated,
+        isTradingArea as isTradingArea,
+        isHot as isHot,
+        level as level,
+        isChina as isChina,
+        pinyin as pinyin,
+        creationDate as creationDate,
+        createdBy as createdBy,
+        modifyDate as modifyDate,
+        modifiedBy as modifiedBy
+        from itrip_area_dic
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="name != null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="areaNo != null and areaNo!=''">
+                and areaNo=#{areaNo}
+            </if>
+            <if test="parent != null and parent!=''">
+                and parent=#{parent}
+            </if>
+            <if test="isActivated != null and isActivated!=''">
+                and isActivated=#{isActivated}
+            </if>
+            <if test="isTradingArea != null and isTradingArea!=''">
+                and isTradingArea=#{isTradingArea}
+            </if>
+            <if test="isHot != null and isHot!=''">
+                and isHot=#{isHot}
+            </if>
+            <if test="level != null and level!=''">
+                and level=#{level}
+            </if>
+            <if test="isChina != null and isChina!=''">
+                and isChina=#{isChina}
+            </if>
+            <if test="pinyin != null and pinyin!=''">
+                and pinyin=#{pinyin}
+            </if>
+            <if test="creationDate != null and creationDate!=''">
+                and creationDate=#{creationDate}
+            </if>
+            <if test="createdBy != null and createdBy!=''">
+                and createdBy=#{createdBy}
+            </if>
+            <if test="modifyDate != null and modifyDate!=''">
+                and modifyDate=#{modifyDagetItripHotelByte}
+            </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getItripHotelFeature" resultType="cn.itrip.beans.pojo.ItripHotelFeature">
+      select * from itrip_hotel_feature
+    </select>
+
+    <select id="itripHotelListByHotCity" resultType="cn.itrip.beans.pojo.ItripHotel">
+        select * FROM itrip_hotel
+        <trim prefix="where" prefixOverrides=" and | or">
+            <if test="cityId != null and cityId!=''">
+                cityId=#{cityId}
+            </if>
+        </trim>
+        order by creationDate desc
+        <if test="count != null  and count !='' ">
+            limit 0,#{count}
+        </if>
+    </select>
+
+    <select id="getItripAreaDic" resultType="cn.itrip.beans.pojo.ItripAreaDic">
+        SELECT
+        id as id,
+        name as name,
+        areaNo as areaNo,
+        parent as parent,
+        isActivated as isActivated,
+        isTradingArea as isTradingArea,
+        isHot as isHot,
+        level as level,
+        isChina as isChina,
+        pinyin as pinyin,
+        creationDate as creationDate,
+        createdBy as createdBy,
+        from itrip_area_dic
+        <trim prefix="where" prefixOverrides="and | or">
+            id=#{id}
+        </trim>
+    </select>
+
+    <select id="itripImgList" resultType="cn.itrip.beans.pojo.ItripImage">
+        select
+        id as id,
+        type as `type`,
+        targetId as targetId,
+        position as position,
+        imgUrl as imgUrl,
+        creationDate as creationDate,
+        createdBy as createdBy,
+        modifyDate as modifyDate,
+        modifiedBy as modifiedBy
+        from itrip_image
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+</mapper>
